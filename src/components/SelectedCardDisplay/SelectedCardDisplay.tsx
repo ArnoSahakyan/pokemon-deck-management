@@ -1,31 +1,27 @@
-import {TSelectedCardProps} from "../../shared/types";
-import {AbilityTag} from "./components/AbilityTag";
+import { ISelectedCardProps } from '../../shared/types';
+import { AbilityTag } from './components/AbilityTag';
+import { FC } from 'react';
 
-type SelectedCardDisplayProps = {
-    data: TSelectedCardProps;
+interface ISelectedCardDisplayProps {
+    data: ISelectedCardProps;
     loading?: boolean;
-};
+}
 
-export const SelectedCardDisplay = ({
-                                        data,
-                                        loading,
-                                    }: SelectedCardDisplayProps) => {
+export const SelectedCardDisplay: FC<ISelectedCardDisplayProps> = ({ data, loading }) => {
     if (loading) {
         return (
-            <div
-                className="w-[360px] flex flex-col items-center justify-center bg-white rounded-lg p-4 gap-5 shadow-md border-gray-200 border-2">
-                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"/>
+            <div className="w-[360px] flex flex-col items-center justify-center bg-white rounded-lg p-4 gap-5 shadow-md border-gray-200 border-2">
+                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg" />
                 <div className="w-full flex flex-col gap-4">
-                    <div className="w-full h-6 bg-gray-200 animate-pulse rounded"/>
-                    <div className="w-full h-6 bg-gray-200 animate-pulse rounded"/>
+                    <div className="w-full h-6 bg-gray-200 animate-pulse rounded" />
+                    <div className="w-full h-6 bg-gray-200 animate-pulse rounded" />
                 </div>
             </div>
         );
     }
 
     return (
-        <div
-            className="w-[360px] flex flex-col items-center justify-center bg-white rounded-lg p-4 gap-5 shadow-md border-gray-200 border-2">
+        <div className="w-[360px] flex flex-col items-center justify-center bg-white rounded-lg p-4 gap-5 shadow-md border-gray-200 border-2">
             <img
                 src={data.image}
                 alt={data.name}
@@ -36,7 +32,7 @@ export const SelectedCardDisplay = ({
                     <p className="text-lg font-bold leading-none">{data.name}</p>
                     <div className="flex items-center gap-1">
                         {data.abilities.slice(0, 2).map((ability, index) => (
-                            <AbilityTag key={index} ability={ability.ability.name}/>
+                            <AbilityTag key={index} ability={ability.ability.name} />
                         ))}
                         {data.abilities.length > 2 && <span>...</span>}
                     </div>

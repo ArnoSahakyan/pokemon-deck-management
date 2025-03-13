@@ -1,23 +1,27 @@
-import React, {useEffect} from "react";
-import {usePokemon} from "../../context";
-import {useDecks, usePokemonData} from "../../hooks";
-import {DecksSection, NewCardStackSection} from "../../sections";
-import {SelectedCardDisplay} from "../../components/SelectedCardDisplay";
-import {TCardProps} from "../../shared/types";
+import React, { DragEventHandler, useEffect } from 'react';
+import { usePokemon } from '../../context';
+import { useDecks, usePokemonData } from '../../hooks';
+import { DecksSection, NewCardStackSection } from './components';
+import { SelectedCardDisplay } from '../../components/SelectedCardDisplay';
+import { ICardProps } from '../../shared/types';
 
 export const Main = () => {
-    const {pokemons, setPokemons, focusedPokemon, loading, fetchingDetails, getFocusedPokemon} = usePokemonData();
-    const {deck1, deck2, handleDrop} = useDecks();
-    const {selectedPokemon, handleCardClick} = usePokemon();
+    const { pokemons, setPokemons, focusedPokemon, loading, fetchingDetails, getFocusedPokemon } =
+        usePokemonData();
+    const { deck1, deck2, handleDrop } = useDecks();
+    const { selectedPokemon, handleCardClick } = usePokemon();
 
-    const handleDragStart = (e: React.DragEvent<HTMLDivElement>, card: TCardProps) => {
+    const handleDragStart = (e: DragEventHandler<HTMLDivElement>, card: ICardProps) => {
         if (selectedPokemon.name !== card.name) {
             handleCardClick(card.name, card.image);
         }
-        e.dataTransfer.setData("card", JSON.stringify(card));
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        e.dataTransfer.setData('card', JSON.stringify(card));
     };
 
-    const handleCardDrop = (deckNumber: number, card: TCardProps) => {
+    const handleCardDrop = (deckNumber: number, card: ICardProps) => {
         if (pokemons.some((p) => p.name === card.name)) {
             setPokemons((prevPokemons) => prevPokemons.filter((p) => p.name !== card.name));
         }
@@ -39,27 +43,23 @@ export const Main = () => {
         );
 
     return (
-        <main className="relative flex flex-col justify-between w-full">
-            <img
-                src="/background.png"
-                alt="Background"
-                className="absolute w-full h-screen object-cover -z-10"
-            />
-
-            <NewCardStackSection pokemons={pokemons} onDragStart={handleDragStart}/>
+        <main className="flex flex-col justify-between w-full">
+            <NewCardStackSection pokemons={pokemons[0]} onDragStart={handleDragStart} />
 
             {focusedPokemon ? (
-                <div className="h-[500px] flex justify-center items-center p-12">
-                    <SelectedCardDisplay data={focusedPokemon} loading={fetchingDetails}/>
+                <div className="h-[450px] flex justify-center items-center">
+                    <SelectedCardDisplay data={focusedPokemon} loading={fetchingDetails} />
                 </div>
             ) : (
-                <div className="h-[500px]"/>
+                <div className="h-[450px]" />
             )}
 
             <DecksSection
                 deck1={deck1}
                 deck2={deck2}
                 handleDrop={handleCardDrop}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 onDragStart={handleDragStart}
             />
         </main>

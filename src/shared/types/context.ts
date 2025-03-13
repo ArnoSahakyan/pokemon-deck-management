@@ -1,4 +1,4 @@
-export type PokemonContextType = {
+export interface PokemonContextType {
     selectedPokemon: {
         name: string;
         image: string;

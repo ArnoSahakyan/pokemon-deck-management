@@ -1,11 +1,11 @@
-import {useState} from "react";
-import {TCardProps} from "../shared/types";
+import { useState } from 'react';
+import { ICardProps } from '../shared/types';
 
 export const useDecks = () => {
-    const [deck1, setDeck1] = useState<TCardProps[]>([]);
-    const [deck2, setDeck2] = useState<TCardProps[]>([]);
+    const [deck1, setDeck1] = useState<ICardProps[]>([]);
+    const [deck2, setDeck2] = useState<ICardProps[]>([]);
 
-    const handleDrop = (deckNumber: number, card: TCardProps) => {
+    const handleDrop = (deckNumber: number, card: ICardProps) => {
         setDeck1((prevDeck1) => prevDeck1.filter((c) => c.name !== card.name));
         setDeck2((prevDeck2) => prevDeck2.filter((c) => c.name !== card.name));
 

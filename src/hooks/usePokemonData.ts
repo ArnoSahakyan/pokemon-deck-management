@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
-import {fetchPokemonDetails, fetchRandomPokemons} from "../services/fetchPokemons";
-import {TCardProps, TSelectedCardProps} from "../shared/types";
+import { useState, useEffect } from 'react';
+import { fetchPokemonDetails, fetchRandomPokemons } from '../services';
+import { ICardProps, ISelectedCardProps } from '../shared/types';
 
 export const usePokemonData = () => {
-    const [pokemons, setPokemons] = useState<TCardProps[]>([]);
-    const [focusedPokemon, setFocusedPokemon] = useState<TSelectedCardProps | null>(null);
+    const [pokemons, setPokemons] = useState<ICardProps[]>([]);
+    const [focusedPokemon, setFocusedPokemon] = useState<ISelectedCardProps | null>(null);
     const [loading, setLoading] = useState(true);
     const [fetchingDetails, setFetchingDetails] = useState(false);
 
@@ -13,7 +13,7 @@ export const usePokemonData = () => {
             const response = await fetchRandomPokemons();
             setPokemons(response.data.pokemons.results);
         } catch (err) {
-            console.error("Failed to fetch Pokémon data");
+            console.error('Failed to fetch Pokémon data');
         } finally {
             setLoading(false);
         }
@@ -21,11 +21,13 @@ export const usePokemonData = () => {
 
     const getFocusedPokemon = async (name: string, image: string) => {
         setFetchingDetails(true);
+
         try {
             const response = await fetchPokemonDetails(name);
-            setFocusedPokemon({...response.data.pokemon, image});
+
+            setFocusedPokemon({ ...response.data.pokemon, image });
         } catch (err) {
-            console.error("Failed to fetch Pokémon details");
+            console.error('Failed to fetch Pokémon details');
         } finally {
             setFetchingDetails(false);
         }
@@ -37,10 +39,10 @@ export const usePokemonData = () => {
 
     return {
         pokemons,
-        setPokemons,
         focusedPokemon,
         loading,
         fetchingDetails,
+        setPokemons,
         getFocusedPokemon,
     };
 };
