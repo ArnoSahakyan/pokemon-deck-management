@@ -1,18 +1,16 @@
 import React, { FC, useState } from 'react';
 import { Card } from '../Card';
-import { ICardProps } from '../../shared/types';
-import { usePokemon } from '../../context';
+import { ICardProps } from '../../shared';
+import { usePokemonStore } from '../../store';
 
 interface IDeckProps {
     data: ICardProps[];
     onDrop: (card: ICardProps) => void;
-    onDragStart: (e: React.DragEvent<HTMLDivElement>, card: ICardProps) => void;
 }
 
-export const Deck: FC<IDeckProps> = ({ data, onDrop, onDragStart }) => {
-    const { selectedPokemon, handleCardClick } = usePokemon();
+export const Deck: FC<IDeckProps> = ({ data, onDrop }) => {
+    const { getFocusedPokemon, focusedPokemon, handleDragStart } = usePokemonStore((state) => state);
     const [deckName, setDeckName] = useState('Deck Name');
-    const [isEditing, setIsEditing] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDeckName(e.target.value);
@@ -34,34 +32,24 @@ export const Deck: FC<IDeckProps> = ({ data, onDrop, onDragStart }) => {
             onDragOver={handleDragOver}
             onDrop={handleDrop}
         >
-            {isEditing || deckName.length === 0 ? (
-                <input
-                    type="text"
-                    value={deckName}
-                    onChange={handleChange}
-                    onBlur={() => setIsEditing(false)}
-                    placeholder="Untitled Deck"
-                    className="w-full border-none outline-none bg-transparent text-lg font-bold self-start"
-                />
-            ) : (
-                <button
-                    className="w-full text-left text-lg font-bold cursor-pointer self-start"
-                    onClick={() => setIsEditing(true)}
-                >
-                    {deckName}
-                </button>
-            )}
+            <input
+                type="text"
+                value={deckName}
+                onChange={handleChange}
+                placeholder="Untitled Deck"
+                className="w-full border-none outline-none bg-transparent text-lg font-bold self-start"
+            />
 
-            <div className="min-h-40 min-w-64 flex gap-4 justify-center items-center">
+            <div className="min-h-[164px] min-w-64 flex gap-4 justify-center items-center">
                 {data.map((card: ICardProps) => (
                     <Card
                         data={card}
-                        isSelected={selectedPokemon.name === card.name}
+                        isSelected={focusedPokemon?.name === card.name}
                         key={card.name}
-                        onClick={() => handleCardClick(card.name, card.image)}
+                        onClick={() => getFocusedPokemon(card.name, card.image)}
                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         // @ts-ignore
-                        onDragStart={(e) => onDragStart(e, card)}
+                        onDragStart={(e) => handleDragStart(e, card)}
                     />
                 ))}
             </div>
