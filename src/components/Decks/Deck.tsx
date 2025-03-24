@@ -37,10 +37,10 @@ export const Deck: FC<IDeckProps> = ({ data, onDrop }) => {
                 value={deckName}
                 onChange={handleChange}
                 placeholder="Untitled Deck"
-                className="w-full border-none outline-none bg-transparent text-lg font-bold self-start"
+                className="max-w-40 border-none outline-none bg-transparent text-lg font-bold self-start"
             />
 
-            <div className="min-h-[164px] min-w-64 flex gap-4 justify-center items-center">
+            <div className="min-h-[164px] min-w-32 flex gap-4 justify-center items-center">
                 {data.map((card: ICardProps) => (
                     <Card
                         data={card}

@@ -16,7 +16,7 @@ export const Card: FC<ICardComponentProps> = (props) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <button
-            className={`w-36 flex flex-col items-center justify-center gap-2 p-4 border-2 rounded-lg cursor-pointer ${
+            className={`w-30 flex flex-col items-center justify-center gap-2 p-4 border-2 rounded-lg cursor-pointer ${
                 isSelected ? 'border-blue-500' : 'border-gray-300'
             }`}
             draggable

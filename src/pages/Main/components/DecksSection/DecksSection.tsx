@@ -9,7 +9,7 @@ export const DecksSection = () => {
     const handleCardDrop = usePokemonStore((state) => state.handleCardDrop);
 
     return (
-        <div className="py-4 flex justify-center gap-4">
+        <div className="py-4 flex justify-center gap-2">
             {decks.map((deck: ICardProps[], index: number) => {
                 return <Deck key={index} data={deck} onDrop={(card) => handleCardDrop(index + 1, card)} />;
             })}
