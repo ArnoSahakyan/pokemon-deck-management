@@ -1,1 +1,1 @@
-export * from './shuffleButton';
+export * from './ShuffleButton';

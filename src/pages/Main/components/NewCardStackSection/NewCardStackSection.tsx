@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Card, NewCardStack } from '../../../../components';
 import { ResetButton } from './components';
 import { useDecksStore, usePokemonStore } from '../../../../store';
+import {POKEMONS_LIMIT} from "../../../../shared";
 
 export const NewCardStackSection = () => {
     const {
@@ -11,7 +12,7 @@ export const NewCardStackSection = () => {
         focusedPokemon,
         isLoading,
         handleDragStart,
-        resetFocusedPokemon,
+        resetPokemons,
     } = usePokemonStore((state) => state);
     const resetDecks = useDecksStore((state) => state.resetDecks);
 
@@ -20,15 +21,14 @@ export const NewCardStackSection = () => {
     }, []);
 
     const handleResetDecks = () => {
-        if (pokemons.length < 10) {
-            resetFocusedPokemon();
+        if (pokemons.length < POKEMONS_LIMIT) {
+            resetPokemons();
             resetDecks();
-            getPokemons();
         }
     };
 
     const isResetDisabled = () => {
-        return pokemons.length === 10 || isLoading;
+        return pokemons.length === POKEMONS_LIMIT || isLoading;
     };
 
     return (

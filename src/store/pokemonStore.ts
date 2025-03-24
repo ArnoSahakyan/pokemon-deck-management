@@ -5,18 +5,20 @@ import { useDecksStore } from './deckStore';
 
 interface IPokemonState {
   pokemons: ICardProps[];
+  storedPokemons: ICardProps[];
   focusedPokemon: ISelectedCardProps | null;
   isLoading: boolean;
   isFetchingDetails: boolean;
   getPokemons: () => void;
   getFocusedPokemon: (name: string, image: string) => void;
-  resetFocusedPokemon: () => void;
+  resetPokemons: () => void;
   handleDragStart: (e: DragEvent, card: ICardProps) => void;
   handleCardDrop: (deckNumber: number, card: ICardProps) => void;
 }
 
 export const usePokemonStore = create<IPokemonState>((set, get) => ({
   pokemons: [],
+  storedPokemons: [],
   focusedPokemon: null,
   isLoading: true,
   isFetchingDetails: false,
@@ -25,7 +27,7 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
     set({ isLoading: true });
     try {
       const response = await fetchRandomPokemons();
-      set({ pokemons: response.data.pokemons.results });
+      set({ pokemons: response.data.pokemons.results, storedPokemons: response.data.pokemons.results });
     } catch (err) {
       console.error('Failed to fetch Pokémon data');
     } finally {
@@ -34,6 +36,9 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
   },
 
   getFocusedPokemon: async (name, image) => {
+    const { focusedPokemon } = get();
+    if(focusedPokemon?.name === name) return;
+
     set({ isFetchingDetails: true });
     try {
       const response = await fetchPokemonDetails(name);
@@ -45,7 +50,9 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
     }
   },
 
-  resetFocusedPokemon: () => set({ focusedPokemon: null }),
+  resetPokemons: () => {
+    set({ pokemons: get().storedPokemons, focusedPokemon: null });
+  },
 
   handleDragStart: (e: DragEvent, card: ICardProps) => {
     const { focusedPokemon, getFocusedPokemon } = get();
