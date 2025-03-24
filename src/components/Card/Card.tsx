@@ -1,5 +1,5 @@
 import React, { DragEventHandler, FC } from 'react';
-import { ICardProps } from '../../shared/types';
+import {capitalizedCardName, ICardProps} from "../../shared";
 
 interface ICardComponentProps {
     data: ICardProps;
@@ -22,12 +22,8 @@ export const Card: FC<ICardComponentProps> = (props) => {
             draggable
             {...restProps}
         >
-            <img
-                src={data.image}
-                alt={data.name}
-                className="w-full h-auto select-none pointer-events-none"
-            />
-            <p className="text-center mt-2">{data.name}</p>
+            <img src={data.image} alt={data.name} className="select-none pointer-events-none w-24 h-24" />
+            <p className="text-center mt-2">{capitalizedCardName(data.name)}</p>
         </button>
     );
 };
