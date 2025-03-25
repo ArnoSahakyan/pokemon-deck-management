@@ -1,6 +1,12 @@
 # Pokémon Deck Manager
 
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://pokemon-deck-management.vercel.app/)
+
 A React-based web application for managing Pokémon decks. Users can drag and drop Pokémon cards from a new card stack into custom decks, view detailed information about selected Pokémon, and organize their collections.
+
+## 🚀 Live Demo
+
+Experience the app live: [https://pokemon-deck-management.vercel.app/](https://pokemon-deck-management.vercel.app/)
 
 ## Features
 
@@ -82,9 +88,8 @@ If you have any questions or feedback, feel free to reach out:
 
 - **Email**: sahakyan.arno@gmail.com
 - **LinkedIn**: [Arno Sahakyan](https://www.linkedin.com/in/arno-sahakyan/)
+- **GitHub**: [ArnoSahakyan](https://github.com/ArnoSahakyan)
 
 ---
 
-Made with ❤️ by [Arno Sahakyan](https://github.com/ArnoSahakyan)
-
----
+Made with ❤️ by Arno Sahakyan | [View Live Demo](https://pokemon-deck-management.vercel.app/)
