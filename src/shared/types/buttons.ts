@@ -1,4 +1,4 @@
 export interface IButtonProps {
-    onClick?: () => void;
-    disabled?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
 }

@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { ICardProps } from '../shared';
-import { initialDecks } from '../shared';
+import { create } from "zustand";
+import { ICardProps } from "../shared";
+import { initialDecks } from "../shared";
 
 interface DecksStore {
   decks: ICardProps[][];
@@ -14,7 +14,9 @@ export const useDecksStore = create<DecksStore>((set) => ({
     set((state) => ({
       decks: state.decks
         .map((deck) => deck.filter((c) => c.name !== card.name))
-        .map((deck, index) => (index + 1 === deckNumber ? [...deck, card] : deck)),
+        .map((deck, index) =>
+          index + 1 === deckNumber ? [...deck, card] : deck
+        ),
     })),
   resetDecks: () => set({ decks: initialDecks }),
 }));

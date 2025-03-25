@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import {IButtonProps} from "../../../../../../shared";
+import { FC } from "react";
+import { IButtonProps } from "../../../../../../shared";
 
 export const ResetButton: FC<IButtonProps> = ({ onClick, disabled }) => {
   return (

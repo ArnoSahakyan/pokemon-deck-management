@@ -1,2 +1,2 @@
-export * from './deckStore';
-export * from './pokemonStore';
+export * from "./deckStore";
+export * from "./pokemonStore";

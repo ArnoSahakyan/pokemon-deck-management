@@ -1,11 +1,11 @@
-import { handler } from './api-handler';
-import {POKEMONS_LIMIT, TOTAL_POKEMONS} from "../shared";
+import { handler } from "./api-handler";
+import { POKEMONS_LIMIT, TOTAL_POKEMONS } from "../shared";
 
 const fetchRandomPokemons = async () => {
-    const offset = Math.floor(Math.random() * (TOTAL_POKEMONS - POKEMONS_LIMIT));
+  const offset = Math.floor(Math.random() * (TOTAL_POKEMONS - POKEMONS_LIMIT));
 
-    return handler({
-        query: `
+  return handler({
+    query: `
             query {
                 pokemons(limit: ${POKEMONS_LIMIT}, offset: ${offset}) {
                     results {
@@ -15,12 +15,12 @@ const fetchRandomPokemons = async () => {
                 }
             }
         `,
-    });
+  });
 };
 
 const fetchPokemonDetails = async (name: string) =>
-    handler({
-        query: `
+  handler({
+    query: `
       query {
         pokemon(name: "${name}") {
           name
@@ -35,6 +35,6 @@ const fetchPokemonDetails = async (name: string) =>
         }
       }
     `,
-    });
+  });
 
 export { fetchPokemonDetails, fetchRandomPokemons };

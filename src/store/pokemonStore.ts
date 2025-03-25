@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { ICardProps, ISelectedCardProps } from '../shared';
-import { fetchPokemonDetails, fetchRandomPokemons } from '../services';
-import { useDecksStore } from './deckStore';
+import { create } from "zustand";
+import { ICardProps, ISelectedCardProps } from "../shared";
+import { fetchPokemonDetails, fetchRandomPokemons } from "../services";
+import { useDecksStore } from "./deckStore";
 
 interface IPokemonState {
   pokemons: ICardProps[];
@@ -27,9 +27,12 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
     set({ isLoading: true });
     try {
       const response = await fetchRandomPokemons();
-      set({ pokemons: response.data.pokemons.results, storedPokemons: response.data.pokemons.results });
+      set({
+        pokemons: response.data.pokemons.results,
+        storedPokemons: response.data.pokemons.results,
+      });
     } catch (err) {
-      console.error('Failed to fetch Pokémon data');
+      console.error("Failed to fetch Pokémon data");
     } finally {
       set({ isLoading: false });
     }
@@ -37,14 +40,14 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
 
   getFocusedPokemon: async (name, image) => {
     const { focusedPokemon } = get();
-    if(focusedPokemon?.name === name) return;
+    if (focusedPokemon?.name === name) return;
 
     set({ isFetchingDetails: true });
     try {
       const response = await fetchPokemonDetails(name);
       set({ focusedPokemon: { ...response.data.pokemon, image } });
     } catch (err) {
-      console.error('Failed to fetch Pokémon details');
+      console.error("Failed to fetch Pokémon details");
     } finally {
       set({ isFetchingDetails: false });
     }
@@ -59,7 +62,7 @@ export const usePokemonStore = create<IPokemonState>((set, get) => ({
     if (focusedPokemon?.name !== card.name) {
       getFocusedPokemon(card.name, card.image);
     }
-    e.dataTransfer?.setData('card', JSON.stringify(card));
+    e.dataTransfer?.setData("card", JSON.stringify(card));
   },
 
   handleCardDrop: (deckNumber: number, card: ICardProps) => {

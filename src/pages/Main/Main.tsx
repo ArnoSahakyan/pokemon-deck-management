@@ -1,13 +1,17 @@
-import { DecksSection, NewCardStackSection, SelectedCardSection } from './components';
+import {
+  DecksSection,
+  NewCardStackSection,
+  SelectedCardSection,
+} from "./components";
 
 export const Main = () => {
-    return (
-        <main className="flex flex-col justify-between w-full">
-            <NewCardStackSection />
+  return (
+    <main className="flex flex-col justify-between w-full">
+      <NewCardStackSection />
 
-            <SelectedCardSection />
+      <SelectedCardSection />
 
-            <DecksSection />
-        </main>
-    );
+      <DecksSection />
+    </main>
+  );
 };

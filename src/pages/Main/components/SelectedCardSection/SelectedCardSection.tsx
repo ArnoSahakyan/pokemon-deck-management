@@ -1,9 +1,9 @@
-import { SelectedCardDisplay } from '../../../../components';
+import { SelectedCardDisplay } from "../../../../components";
 
 export const SelectedCardSection = () => {
   return (
-        <div className="h-[450px] flex justify-center items-center">
-          <SelectedCardDisplay />
-        </div>
-      )
+    <div className="h-[450px] flex justify-center items-center">
+      <SelectedCardDisplay />
+    </div>
+  );
 };
