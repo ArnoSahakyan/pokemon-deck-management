@@ -13,7 +13,7 @@ Experience the app live: [https://pokemon-deck-management.vercel.app/](https://p
 - **Drag and Drop**: Easily drag Pokémon cards from the new card stack and drop them into custom decks.
 - **Pokémon Details**: Click on a card to view detailed information about the Pokémon, including abilities, weight, height, and base experience.
 - **Custom Decks**: Create and manage multiple decks to organize your Pokémon collection.
-- **Reset Decks**: Clear all decks and start fresh with a new set of Pokémon cards.
+- **Reset Decks**: Clear all decks and start fresh with organizing your Pokémon cards.
 - **Shuffle Cards**: Fetch a new set of random Pokémon cards to refresh the new card stack.
 ## Technologies Used
 
