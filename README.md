@@ -15,7 +15,6 @@ Experience the app live: [https://pokemon-deck-management.vercel.app/](https://p
 - **Custom Decks**: Create and manage multiple decks to organize your Pokémon collection.
 - **Reset Decks**: Clear all decks and start fresh with a new set of Pokémon cards.
 - **Shuffle Cards**: Fetch a new set of random Pokémon cards to refresh the new card stack.
-- 
 ## Technologies Used
 
 - **Frontend**: React, TypeScript
